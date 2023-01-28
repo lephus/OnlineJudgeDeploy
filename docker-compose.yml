@@ -78,7 +78,7 @@ services:
       - $PWD/data/forum:/forum
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
-      - E:\WORKSPACE\icpc-app\icpc-front-end\dist:/app/dist
+      - E:\WORKSPACE\OnlineJudgeDeploy\dist:/app/dist
     environment:
       - POSTGRES_DB=onlinejudge
       - POSTGRES_USER=onlinejudge
