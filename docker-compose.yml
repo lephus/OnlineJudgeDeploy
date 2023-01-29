@@ -60,7 +60,7 @@ services:
     environment:
       - SERVICE_URL=http://judge-server:8080
       - BACKEND_URL=http://oj-backend:8000/api/judge_server_heartbeat/
-      - TOKEN=CHANGE_THIS
+      - TOKEN=0d6a3cbbc07090ded4357f0a0ccb3adf
       # - judger_debug=1
   
   oj-backend:
@@ -78,12 +78,12 @@ services:
       - $PWD/data/forum:/forum
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
-      - E:\WORKSPACE\OnlineJudgeDeploy\dist:/app/dist
+      - ./dist:/app/dist
     environment:
       - POSTGRES_DB=onlinejudge
       - POSTGRES_USER=onlinejudge
       - POSTGRES_PASSWORD=onlinejudge
-      - JUDGE_SERVER_TOKEN=CHANGE_THIS
+      - JUDGE_SERVER_TOKEN=0d6a3cbbc07090ded4357f0a0ccb3adf
       # - FORCE_HTTPS=1
       # - STATIC_CDN_HOST=cdn.oj.com
     ports:
