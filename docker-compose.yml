@@ -9,6 +9,8 @@ services:
       - $PWD/data/redis:/data
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
+    networks:
+      - my_app
   
   oj-postgres:
     image: postgres:10-alpine
@@ -22,6 +24,8 @@ services:
       - POSTGRES_DB=onlinejudge
       - POSTGRES_USER=onlinejudge
       - POSTGRES_PASSWORD=onlinejudge
+    networks:
+      - my_app
 
   oj-forum:
     image: php:7.4-fpm-alpine
@@ -31,7 +35,9 @@ services:
       - $PWD/data/forum:/forum
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
-    
+    networks:
+      - my_app
+
   judge-server:
     # image: registry.cn-hangzhou.aliyuncs.com/onlinejudge/judge_server
     # 原版镜像
@@ -62,7 +68,9 @@ services:
       - BACKEND_URL=http://oj-backend:8000/api/judge_server_heartbeat/
       - TOKEN=0d6a3cbbc07090ded4357f0a0ccb3adf
       # - judger_debug=1
-  
+    networks:
+      - my_app
+
   oj-backend:
     #image: registry.cn-qingdao.aliyuncs.com/wenjian_oj/backend
     image: luyencode/oj-backend
@@ -86,6 +94,12 @@ services:
       - JUDGE_SERVER_TOKEN=0d6a3cbbc07090ded4357f0a0ccb3adf
       # - FORCE_HTTPS=1
       # - STATIC_CDN_HOST=cdn.oj.com
+    networks:
+      - my_app
+
     ports:
       - "0.0.0.0:80:8000"
       - "0.0.0.0:443:1443"
+networks:
+  my_app:
+    driver: bridge
