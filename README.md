@@ -16,22 +16,41 @@ Các module trên đều được đóng gói Docker và đã đẩy lên Docker
 1. Cài đặt môi trường
 
     ```bash
-    sudo apt-get update && sudo apt-get install -y vim python-pip curl git
-    pip install docker-compose
+    sudo apt-get update && sudo apt-get install -y vim python3-pip curl git
+    pip3 install docker-compose
+    ```
+    
+    Có thể gỡ toàn bộ docker trước khi cài đặt bằng câu lệnh sau
+    
+    ```bash
+    dpkg -l | grep -i docker
+    sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli docker-compose-plugin
+    sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce docker-compose-plugin
+    sudo rm -rf /var/lib/docker /etc/docker
+    sudo rm /etc/apparmor.d/docker
+    sudo groupdel docker
+    sudo rm -rf /var/run/docker.sock
+
+    ```
+    
+    Remove container với các câu lệnh sau:
+    
+    ```bash
+    docker stop $(docker ps -aq)
+    docker rm $(docker ps -aq)
     ```
 
-2. Cài Docker 
-
-   ```bash
-   sudo curl -sSL get.docker.com | sh
-   ```
-
-
-3. Clone repo
+2. Clone repo
 
     ```bash
     git clone https://github.com/lephus/OnlineJudgeDeploy.git
     ```
+3. Cài Docker 
+   cd vào folder OnlineJudgeDeploy rồi thực hiện cài đặt docker tương ứng
+    
+   ```bash
+   sudo curl -sSL get.docker.com | sh
+   ```
 
 4. Khởi động
 
